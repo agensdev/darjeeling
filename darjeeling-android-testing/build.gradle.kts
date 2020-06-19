@@ -18,7 +18,7 @@ android {
         minSdkVersion(21)
         targetSdkVersion(29)
         versionCode = gitInfo.count
-        versionName = "0.45"
+        versionName = "0.46"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -36,7 +36,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            uri("https://maven.pkg.github.com/agensdev/darjeeling")
+            uri("https://maven.pkg.github.com/agensdev")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
