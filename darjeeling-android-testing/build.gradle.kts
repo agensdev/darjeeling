@@ -14,7 +14,7 @@ android {
         minSdkVersion(21)
         targetSdkVersion(29)
         versionCode = gitInfo.count
-        versionName = "0.53"
+        versionName = "0.54"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -36,9 +36,9 @@ afterEvaluate {
     publishing {
         publications {
             // Creates a Maven publication called "release".
-            create<MavenPublication>("aar") {
+            create<MavenPublication>("release") {
                 // Applies the component for the release build variant.
-                from(components.getByName("release"))
+                from(components.getByName("aar"))
 
                 // You can then customize attributes of the publication as shown below.
                 groupId = "no.agens.darjeeling"
