@@ -14,7 +14,7 @@ android {
         minSdkVersion(21)
         targetSdkVersion(29)
         versionCode = gitInfo.count
-        versionName = "0.59"
+        versionName = "0.60"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -43,8 +43,7 @@ afterEvaluate {
                 // You can then customize attributes of the publication as shown below.
                 groupId = "no.agens.darjeeling"
                 artifactId = "darjeeling-android-testing"
-                version = project.version.toString()
-//                artifact("$buildDir/outputs/aar/darjeeling-android-testing-release.aar")
+                version = project.android.defaultConfig.versionName
             }
         }
     }
