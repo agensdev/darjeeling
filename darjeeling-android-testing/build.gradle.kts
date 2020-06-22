@@ -44,7 +44,7 @@ afterEvaluate {
                 groupId = "no.agens.darjeeling"
                 artifactId = "darjeeling-android-testing"
                 version = project.version.toString()
-                artifact("$buildDir/outputs/aar/darjeeling-android-testing-release.aar")
+//                artifact("$buildDir/outputs/aar/darjeeling-android-testing-release.aar")
             }
         }
     }
