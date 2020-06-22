@@ -25,9 +25,9 @@ jobs:
       run: gradle :darjeeling-android-testing:build
 
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
-    # the publishing section of your build.gradle
+    # the publishing section of your build.gradle.kts
     - name: Publish to GitHub Packages
-      run: gradle :darjeeling-android-testing:publish
+      run: gradle :darjeeling-android-testing:publishRelease
       env:
         USERNAME: ${{ github.actor }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
