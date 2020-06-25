@@ -98,6 +98,23 @@ object DarjeelingUtils {
         fail("Timed out. Waited for $timeoutMs ms.")
     }
 
+    fun eventuallyFragmentLaunched(timeoutMs: Long = DEFAULT_TIMEOUT,
+        fragmentManager: android.app.FragmentManager, tag: String) {
+
+        val start = currentTimeMillis()
+        while (currentTimeMillis() < start + timeoutMs) {
+            try {
+                fragmentManager.findFragmentByTag(tag) ?: throw IllegalStateException(
+                    "Fragment not yet launched")
+                return
+            } catch (ex: Error) {
+                Thread.sleep(100)
+            }
+        }
+
+        fail("Timed out. Waited for $timeoutMs ms.")
+    }
+
     fun waitFor(timeoutMs: Long = DEFAULT_TIMEOUT, assertion: () -> Unit) {
         val start = currentTimeMillis()
         var lastAssertionError: Error? = null
