@@ -1,6 +1,7 @@
 buildscript {
     val kotlin_version by extra("1.3.72")
     repositories {
+        mavenLocal()
         google()
         jcenter()
         maven { url = java.net.URI("https://jitpack.io") }
@@ -14,6 +15,7 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenLocal()
         google()
         jcenter()
     }
