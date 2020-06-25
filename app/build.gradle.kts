@@ -42,6 +42,6 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.1.0")
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
     testImplementation("junit:junit:4.12")
-    androidTestImplementation(project(":darjeeling-android-testing"))
-
+    androidTestImplementation("junit:junit:4.12")
+    androidTestImplementation("no.agens.darjeeling:darjeeling-android-testing:0.65")
 }
