@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.*
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
+import androidx.recyclerview.widget.RecyclerView
 
 abstract class DarjeelingViewExtensions {
 
@@ -21,6 +22,8 @@ abstract class DarjeelingViewExtensions {
     fun view(@IdRes resId: Int): View = activity.findViewById(resId)
 
     fun checkBox(@IdRes resId: Int): CheckBox = activity.findViewById(resId)
+
+    fun recyclerView(@IdRes resId: Int): RecyclerView = activity.findViewById(resId)
 
     fun string(@StringRes stringResId: Int): String =
         activity.resources.getString(stringResId)
