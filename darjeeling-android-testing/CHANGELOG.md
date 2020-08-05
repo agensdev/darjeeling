@@ -1,4 +1,4 @@
-# 0.--
+# 0.70
 
 * First offical release of Darjeeling
 * Contains helper classes for performing Activity and Fragment testing.

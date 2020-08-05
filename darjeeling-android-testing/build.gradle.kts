@@ -14,7 +14,7 @@ android {
         minSdkVersion(21)
         targetSdkVersion(29)
         versionCode = gitInfo.count
-        versionName = "0.68"
+        versionName = "0.70"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -53,7 +53,7 @@ publishing {
     repositories {
         maven {
             name = "AgensNexus"
-            url = uri("https://repo.agens.no:8081")
+            url = uri("http://repo.agens.no:8081/nexus/content/repositories/oss-releases/")
             credentials {
                 username = properties["nexus_deploy_user"] as String? ?: ""
                 password = properties["nexus_deploy_pwd"] as String? ?: ""

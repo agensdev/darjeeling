@@ -15,7 +15,7 @@ First, you need to add the repository and dependency to your project build file.
 
 ```kotlin
 repositories {
-    maven(url = "https://repo.agens.no:8081/nexus/content/groups/public")
+    maven(url = "http://repo.agens.no:8081/nexus/content/repositories/oss-releases")
 }
 ```
 
@@ -36,3 +36,14 @@ for the latest version.
 Examples on how to use Darjeeling in your project is/will be available  
 in the `app`-module of this repository. You can browse them here on  
 Github or clone the repository and run them from Android Studio.
+
+## Developer documentation
+
+This section contains documentation for developers contributing to the darjeeling-android-testing project itself.
+
+### Publishing new releases
+
+0. Update the version number in the `darjeeling-android-testing/build.gradle.kts` file and commit.
+1. Tag the new version with a tag prefixed with `release_`, i.e. `release_0.70`
+2. Push the changes and tags to the remote
+3. Publish the new artifact using the Gradle command `./gradlew publish`
