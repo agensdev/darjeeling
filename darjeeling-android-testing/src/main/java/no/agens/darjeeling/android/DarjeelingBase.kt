@@ -1,13 +1,16 @@
 package no.agens.darjeeling.android
 
 import android.app.Activity
+import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.media.Image
+import android.os.Build
 import android.view.View
 import android.widget.*
-import androidx.annotation.IdRes
-import androidx.annotation.StringRes
+import androidx.annotation.*
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class DarjeelingViewExtensions {
+abstract class DarjeelingBase {
 
     abstract val activity: Activity
 
@@ -19,6 +22,8 @@ abstract class DarjeelingViewExtensions {
 
     fun imageButton(@IdRes resId: Int): ImageButton = activity.findViewById(resId)
 
+    fun imageView(@IdRes resId: Int): ImageView = activity.findViewById(resId)
+
     fun view(@IdRes resId: Int): View = activity.findViewById(resId)
 
     fun checkBox(@IdRes resId: Int): CheckBox = activity.findViewById(resId)
@@ -27,5 +32,10 @@ abstract class DarjeelingViewExtensions {
 
     fun string(@StringRes stringResId: Int): String =
         activity.resources.getString(stringResId)
+
+    fun drawable(@DrawableRes resId: Int): Drawable = activity.resources.getDrawable(resId, activity.theme)
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun color(@ColorRes resId: Int): Int = activity.resources.getColor(resId, activity.theme)
 
 }

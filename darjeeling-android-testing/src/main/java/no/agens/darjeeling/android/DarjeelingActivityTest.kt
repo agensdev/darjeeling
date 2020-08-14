@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
 
 
 abstract class DarjeelingActivityTest<T : AppCompatActivity>(
-    activityClass: KClass<T>) : DarjeelingViewExtensions() {
+    activityClass: KClass<T>) : DarjeelingBase() {
 
     override val activity: T
         get() = activityRule.activity
