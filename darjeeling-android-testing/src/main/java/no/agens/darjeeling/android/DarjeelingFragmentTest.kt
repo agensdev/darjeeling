@@ -1,6 +1,6 @@
 package no.agens.darjeeling.android
 
-import android.app.Activity
+import androidx.activity.ComponentActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.testing.FragmentScenario
@@ -11,7 +11,7 @@ abstract class DarjeelingFragmentTest<F : Fragment> : DarjeelingBase() {
     private lateinit var underlyingActivity: FragmentActivity
     lateinit var scenario: FragmentScenario<F>
 
-    override val activity: Activity
+    override val activity: ComponentActivity
         get() = underlyingActivity
 
     @Before
