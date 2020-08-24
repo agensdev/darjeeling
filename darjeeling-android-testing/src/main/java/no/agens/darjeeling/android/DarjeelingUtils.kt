@@ -90,7 +90,7 @@ object DarjeelingUtils {
                 fragmentManager.findFragmentByTag(tag) ?: throw IllegalStateException(
                     "Fragment not yet launched")
                 return
-            } catch (ex: Error) {
+            } catch (ex: IllegalStateException) {
                 Thread.sleep(100)
             }
         }
