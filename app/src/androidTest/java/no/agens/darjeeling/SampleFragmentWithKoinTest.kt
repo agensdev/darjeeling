@@ -3,6 +3,7 @@ package no.agens.darjeeling
 import android.os.Bundle
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.mockk.*
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.runBlocking
@@ -10,6 +11,7 @@ import no.agens.darjeeling.android.DarjeelingFragmentTest
 import org.junit.AfterClass
 import org.junit.Assert
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
@@ -19,6 +21,10 @@ class SampleFragmentWithKoinTest : DarjeelingFragmentTest<SampleFragment>() {
         every {
             doSomething()
         } just Runs
+
+        every {
+            returnsTrue()
+        } returns true
     }
 
     override fun createFragmentScenario(): FragmentScenario<SampleFragment> {

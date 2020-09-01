@@ -1,3 +1,13 @@
+# 0.76
+
+* DarjeelingFragmentTest: Added new option to autolaunch fragments for
+each test. This is the default behaviour. You can set this to `false`
+to manually launch fragments using the `launchFragment()` method in
+each test. Useful when you need to modify mocks and dependencies before
+the fragment launches.
+* DarjeelingFragmentTest: Add new method `onFragment` which lets you
+pass in an action to perform on the launched fragment.
+
 # 0.70
 
 * First offical release of Darjeeling

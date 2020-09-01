@@ -10,18 +10,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        startKoin {
-            androidContext(this@MainActivity)
-            modules(module {
-                factory { MyDependency()}
-            })
-        }
     }
 
     class MyDependency() {
         fun doSomething() {
 
         }
+
+        fun returnsTrue(): Boolean = true
     }
 }

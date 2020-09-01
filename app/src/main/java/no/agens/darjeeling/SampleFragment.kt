@@ -23,5 +23,7 @@ class SampleFragment : Fragment() {
             buttonForTesting.text = "Changed text"
             dependency.doSomething()
         }
+
+        textBoolean.text = dependency.returnsTrue().toString()
     }
 }
