@@ -71,11 +71,16 @@ object DarjeelingUtils {
 
     fun <T : Activity> eventuallyActivityLaunched(timeoutMs: Long = DEFAULT_TIMEOUT,
         activity: KClass<T>) {
+
+        eventuallyAsserted(timeoutMs = timeoutMs) {
+            intended(hasComponent(activity.java.name))
+        }
+    }
+
+    fun recordActivityLaunches(block: () -> Unit) {
         Intents.init()
         try {
-            eventuallyAsserted(timeoutMs = timeoutMs) {
-                intended(hasComponent(activity.java.name))
-            }
+            block()
         } finally {
             Intents.release()
         }

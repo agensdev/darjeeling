@@ -51,6 +51,7 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.2.0")
     androidTestImplementation("androidx.test:core:1.2.0")
     androidTestImplementation("org.koin:koin-test:2.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.2.0")
     androidTestImplementation("io.mockk:mockk-android:1.10.0")
     androidTestImplementation(project(":darjeeling-android-testing"))
 }

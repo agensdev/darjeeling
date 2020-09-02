@@ -1,3 +1,9 @@
+# 0.77
+* Fix issue with `DarjeelingUtils.eventuallyActivityLaunched` not
+working. Introduced new wrapper method `recordActivityLaunches` which
+should be used as method body for tests checking for launched activities.
+See `EventuallyActivityLaunchedTest` in app module for example.
+
 # 0.76
 
 * DarjeelingFragmentTest: Added new option to autolaunch fragments for

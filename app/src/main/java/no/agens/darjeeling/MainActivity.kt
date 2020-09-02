@@ -1,15 +1,19 @@
 package no.agens.darjeeling
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
-import org.koin.dsl.module
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        buttonLaunchAnotherActivity.setOnClickListener {
+            val intent = Intent(this, AnotherActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     class MyDependency() {
