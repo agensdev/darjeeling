@@ -1,3 +1,6 @@
+# 0.78
+* `view`-method is now generic and returns any supported view.
+
 # 0.77
 * Fix issue with `DarjeelingUtils.eventuallyActivityLaunched` not
 working. Introduced new wrapper method `recordActivityLaunches` which

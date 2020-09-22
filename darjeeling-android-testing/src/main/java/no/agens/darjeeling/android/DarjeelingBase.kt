@@ -24,7 +24,7 @@ abstract class DarjeelingBase {
 
     fun imageView(@IdRes resId: Int): ImageView = activity.findViewById(resId)
 
-    fun view(@IdRes resId: Int): View = activity.findViewById(resId)
+    fun <T: View> view(@IdRes resId: Int): T = activity.findViewById(resId)
 
     fun checkBox(@IdRes resId: Int): CheckBox = activity.findViewById(resId)
 
