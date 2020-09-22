@@ -8,27 +8,39 @@ import android.os.Build
 import android.view.View
 import android.widget.*
 import androidx.annotation.*
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class DarjeelingBase {
 
     abstract val activity: Activity
 
-    fun editText(@IdRes resId: Int): EditText = activity.findViewById(resId)
+    fun relativeLayout(@IdRes resId: Int): RelativeLayout = view(resId)
 
-    fun textView(@IdRes resId: Int): TextView = activity.findViewById(resId)
+    fun constraintLayout(@IdRes resId: Int): ConstraintLayout = view(resId)
 
-    fun button(@IdRes resId: Int): Button = activity.findViewById(resId)
+    fun linearLayout(@IdRes resId: Int): LinearLayout = view(resId)
 
-    fun imageButton(@IdRes resId: Int): ImageButton = activity.findViewById(resId)
+    fun cardView(@IdRes resId: Int): CardView = view(resId)
 
-    fun imageView(@IdRes resId: Int): ImageView = activity.findViewById(resId)
+    fun progressBar(@IdRes resId: Int): ProgressBar = view(resId)
 
-    fun <T: View> view(@IdRes resId: Int): T = activity.findViewById(resId)
+    fun editText(@IdRes resId: Int): EditText = view(resId)
 
-    fun checkBox(@IdRes resId: Int): CheckBox = activity.findViewById(resId)
+    fun textView(@IdRes resId: Int): TextView = view(resId)
 
-    fun recyclerView(@IdRes resId: Int): RecyclerView = activity.findViewById(resId)
+    fun button(@IdRes resId: Int): Button = view(resId)
+
+    fun imageButton(@IdRes resId: Int): ImageButton = view(resId)
+
+    fun imageView(@IdRes resId: Int): ImageView = view(resId)
+
+    fun checkBox(@IdRes resId: Int): CheckBox = view(resId)
+
+    fun recyclerView(@IdRes resId: Int): RecyclerView = view(resId)
+
+    fun <T : View> view(@IdRes resId: Int): T = activity.findViewById(resId)
 
     fun string(@StringRes stringResId: Int): String =
         activity.resources.getString(stringResId)

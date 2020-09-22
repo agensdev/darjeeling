@@ -1,3 +1,6 @@
+# 0.79
+* Add new methods for obtaining CardView, ProgressBar and various layout view components.
+
 # 0.78
 * `view`-method is now generic and returns any supported view.
 
