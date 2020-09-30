@@ -19,6 +19,7 @@ import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers
 import no.agens.darjeeling.android.ext.stackTraceAsString
+import kotlinx.coroutines.delay
 import org.junit.Assert.fail
 import java.lang.System.currentTimeMillis
 import kotlin.reflect.KClass
@@ -52,6 +53,29 @@ object DarjeelingUtils {
     @Deprecated("Use eventually from now on.")
     fun eventuallyAsserted(timeoutMs: Long = DEFAULT_TIMEOUT, assertionFunction: () -> Unit) {
         eventually(timeoutMs, assertionFunction)
+    }
+
+    /**
+     * Retries the assertion until it succeeds or timeout is reached.
+     * Suspends after each assertion without blocking the thread so that any coroutines may
+     * continue working.
+     */
+    suspend fun coEventuallyAssertThat(
+        timeoutMs: Long = DEFAULT_TIMEOUT,
+        assertionFunction: () -> Unit
+    ) {
+        val start = currentTimeMillis()
+        while (currentTimeMillis() < start + timeoutMs) {
+            try {
+                assertionFunction()
+                return
+            } catch (ex: Error) {
+                delay(100)
+            }
+        }
+
+        println("Waited for $timeoutMs ms.")
+        assertionFunction()
     }
 
     fun <T : Activity> eventuallyActivityLaunched(
