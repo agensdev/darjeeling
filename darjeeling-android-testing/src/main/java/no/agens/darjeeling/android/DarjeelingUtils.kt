@@ -26,18 +26,19 @@ object DarjeelingUtils {
 
     private const val DEFAULT_TIMEOUT = 2000L
 
-    fun eventually(timeoutMs: Long = DEFAULT_TIMEOUT, viewAssertion: () -> ViewInteraction) {
+    fun eventually(timeoutMs: Long = DEFAULT_TIMEOUT, assertionFunction: () -> ViewInteraction) {
         val start = currentTimeMillis()
         while (currentTimeMillis() < start + timeoutMs) {
             try {
-                viewAssertion()
+                assertionFunction()
                 return
             } catch (ex: Error) {
                 Thread.sleep(100)
             }
         }
 
-        fail("Timed out. Waited for $timeoutMs ms.")
+        println("Waited for $timeoutMs ms.")
+        assertionFunction()
     }
 
     fun eventuallyAssertThat(timeoutMs: Long = DEFAULT_TIMEOUT, assertionFunction: () -> Unit) {
@@ -51,26 +52,30 @@ object DarjeelingUtils {
             }
         }
 
-        fail("Timed out. Waited for $timeoutMs ms.")
+        println("Waited for $timeoutMs ms.")
+        assertionFunction()
     }
 
 
-    fun eventuallyAsserted(timeoutMs: Long = DEFAULT_TIMEOUT, viewAssertion: () -> Unit) {
+    fun eventuallyAsserted(timeoutMs: Long = DEFAULT_TIMEOUT, assertionFunction: () -> Unit) {
         val start = currentTimeMillis()
         while (currentTimeMillis() < start + timeoutMs) {
             try {
-                viewAssertion()
+                assertionFunction()
                 return
             } catch (ex: Error) {
                 Thread.sleep(100)
             }
         }
 
-        fail("Timed out. Waited for $timeoutMs ms.")
+        println("Waited for $timeoutMs ms.")
+        assertionFunction()
     }
 
-    fun <T : Activity> eventuallyActivityLaunched(timeoutMs: Long = DEFAULT_TIMEOUT,
-        activity: KClass<T>) {
+    fun <T : Activity> eventuallyActivityLaunched(
+        timeoutMs: Long = DEFAULT_TIMEOUT,
+        activity: KClass<T>
+    ) {
 
         eventuallyAsserted(timeoutMs = timeoutMs) {
             intended(hasComponent(activity.java.name))
@@ -86,43 +91,51 @@ object DarjeelingUtils {
         }
     }
 
-    fun eventuallyFragmentLaunched(timeoutMs: Long = DEFAULT_TIMEOUT,
-        fragmentManager: FragmentManager, tag: String) {
+    fun eventuallyFragmentLaunched(
+        timeoutMs: Long = DEFAULT_TIMEOUT,
+        fragmentManager: FragmentManager, tag: String
+    ) {
+
+        val fragmentLaunchedTest = {
+            fragmentManager.findFragmentByTag(tag) ?: throw IllegalStateException(
+                "Fragment not yet launched"
+            )
+        }
 
         val start = currentTimeMillis()
         while (currentTimeMillis() < start + timeoutMs) {
             try {
-                fragmentManager.findFragmentByTag(tag) ?: throw IllegalStateException(
-                    "Fragment not yet launched")
+                fragmentLaunchedTest()
                 return
             } catch (ex: IllegalStateException) {
                 Thread.sleep(100)
             }
         }
 
-        fail("Timed out. Waited for $timeoutMs ms.")
+        println("Waited for $timeoutMs ms.")
+        fragmentLaunchedTest()
     }
 
     fun waitFor(timeoutMs: Long = DEFAULT_TIMEOUT, assertion: () -> Unit) {
         val start = currentTimeMillis()
-        var lastAssertionError: Error? = null
         while (currentTimeMillis() < start + timeoutMs) {
             try {
                 assertion()
                 return
             } catch (ex: Error) {
-                lastAssertionError = ex
                 Thread.sleep(100)
             }
         }
 
-        fail("Timed out. Waited for $timeoutMs ms. Error: $lastAssertionError   ")
-
+        println("Waited for $timeoutMs ms.")
+        assertion()
     }
 
 
-    fun waitForRecyclerViewToHaveData(recyclerView: RecyclerView?,
-        timeoutMs: Long = DEFAULT_TIMEOUT) {
+    fun waitForRecyclerViewToHaveData(
+        recyclerView: RecyclerView?,
+        timeoutMs: Long = DEFAULT_TIMEOUT
+    ) {
 
         val start = currentTimeMillis()
         while (currentTimeMillis() < start + timeoutMs && recyclerView?.childCount == 0) {
@@ -138,14 +151,20 @@ object DarjeelingUtils {
 
         return Espresso.onView(ViewMatchers.withText(titleRes))
             .inRoot(RootMatchers.isDialog()).check(
-                ViewAssertions.matches(ViewMatchers.isDisplayed()))
+                ViewAssertions.matches(ViewMatchers.isDisplayed())
+            )
     }
 
     fun slideRecyclerItemLeft(@IdRes recyclerViewId: Int, position: Int): ViewInteraction {
         return Espresso.onView(ViewMatchers.withId(recyclerViewId)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(position,
-                GeneralSwipeAction(Swipe.FAST, GeneralLocation.CENTER_RIGHT,
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                position,
+                GeneralSwipeAction(
+                    Swipe.FAST, GeneralLocation.CENTER_RIGHT,
                     GeneralLocation.CENTER,
-                    Press.FINGER)))
+                    Press.FINGER
+                )
+            )
+        )
     }
 }
