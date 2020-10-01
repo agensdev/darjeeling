@@ -18,8 +18,8 @@ import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers
+import kotlinx.coroutines.*
 import no.agens.darjeeling.android.ext.stackTraceAsString
-import kotlinx.coroutines.delay
 import org.junit.Assert.fail
 import java.lang.System.currentTimeMillis
 import kotlin.reflect.KClass
@@ -28,22 +28,29 @@ object DarjeelingUtils {
 
     private const val DEFAULT_TIMEOUT = 2000L
 
-    fun eventually(timeoutMs: Long = DEFAULT_TIMEOUT, assertion: () -> Unit) {
+
+    fun eventually(timeoutMs: Long = DEFAULT_TIMEOUT, assertion: () -> Unit) =
+        eventually(timeoutMs, Dispatchers.Default, assertion)
+
+    fun eventually(timeoutMs: Long = DEFAULT_TIMEOUT, dispatcher: CoroutineDispatcher = Dispatchers.Default,
+        assertion: () -> Unit) = runBlocking(dispatcher) {
         val start = currentTimeMillis()
         var lastError: Error? = null
         while (currentTimeMillis() < start + timeoutMs) {
             try {
                 assertion()
-                return
+                return@runBlocking
             } catch (ex: Error) {
                 lastError = ex
-                Thread.sleep(100)
+                delay(100)
             }
         }
 
-        fail("Waited for $timeoutMs ms.\n\uD83D\uDCA5 Assertion error: ${lastError?.message}. Trace: ${lastError?.stackTraceAsString()}")
+        fail(
+            "Waited for $timeoutMs ms.\n\uD83D\uDCA5 Assertion error: ${lastError?.message}. Trace: ${lastError?.stackTraceAsString()}")
 
     }
+
 
     @Deprecated("Use eventually from now on.")
     fun eventuallyAssertThat(timeoutMs: Long = DEFAULT_TIMEOUT, assertion: () -> Unit) {
@@ -53,29 +60,6 @@ object DarjeelingUtils {
     @Deprecated("Use eventually from now on.")
     fun eventuallyAsserted(timeoutMs: Long = DEFAULT_TIMEOUT, assertionFunction: () -> Unit) {
         eventually(timeoutMs, assertionFunction)
-    }
-
-    /**
-     * Retries the assertion until it succeeds or timeout is reached.
-     * Suspends after each assertion without blocking the thread so that any coroutines may
-     * continue working.
-     */
-    suspend fun coEventuallyAssertThat(
-        timeoutMs: Long = DEFAULT_TIMEOUT,
-        assertionFunction: () -> Unit
-    ) {
-        val start = currentTimeMillis()
-        while (currentTimeMillis() < start + timeoutMs) {
-            try {
-                assertionFunction()
-                return
-            } catch (ex: Error) {
-                delay(100)
-            }
-        }
-
-        println("Waited for $timeoutMs ms.")
-        assertionFunction()
     }
 
     fun <T : Activity> eventuallyActivityLaunched(
