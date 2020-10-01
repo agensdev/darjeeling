@@ -5,8 +5,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.testing.FragmentScenario
 import org.junit.Before
 
-abstract class DarjeelingFragmentTest<F : Fragment>(private val autoLaunchFragments: Boolean = true) :
-    DarjeelingBase() {
+abstract class DarjeelingFragmentTest<F : Fragment>(
+    private val autoLaunchFragments: Boolean = true
+) : DarjeelingBase() {
 
     private lateinit var underlyingActivity: FragmentActivity
     private lateinit var scenario: FragmentScenario<F>

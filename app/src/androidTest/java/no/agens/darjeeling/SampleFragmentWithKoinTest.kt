@@ -12,6 +12,7 @@ import org.junit.AfterClass
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
@@ -32,11 +33,9 @@ class SampleFragmentWithKoinTest : DarjeelingFragmentTest<SampleFragment>() {
     }
 
     init {
-        startKoin {
-            modules(module {
-                factory<MainActivity.MyDependency>(override = true) { mockedDependency }
-            })
-        }
+        loadKoinModules(module {
+            factory<MainActivity.MyDependency>(override = true) { mockedDependency }
+        })
     }
 
     @Test
@@ -50,12 +49,4 @@ class SampleFragmentWithKoinTest : DarjeelingFragmentTest<SampleFragment>() {
         }
     }
 
-    companion object {
-
-        @JvmStatic
-        @AfterClass
-        fun stopKoin() {
-            stopKoin()
-        }
-    }
 }
