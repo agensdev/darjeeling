@@ -1,3 +1,6 @@
+# 0.81
+* Add better support for coroutines with `eventually` methods.
+
 # 0.80
 * All eventually methods will now provide a better error message,
 including the assertion error, when they time out.
