@@ -2,16 +2,15 @@ package no.agens.darjeeling
 
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
 import no.agens.darjeeling.android.DarjeelingFragmentTest
+import no.agens.darjeeling.android.DarjeelingUtils.eventually
 import no.agens.darjeeling.android.DarjeelingUtils.eventuallyAssertThat
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 import org.koin.test.KoinTest
@@ -47,7 +46,7 @@ class SampleFragmentWithoutAutolaunchTest : DarjeelingFragmentTest<SampleFragmen
         setupKoin()
         launchFragment()
 
-        eventuallyAssertThat {
+        eventually {
             assertThat(textView(R.id.textBoolean).text.toString()).isEqualTo("true")
         }
     }
@@ -69,7 +68,7 @@ class SampleFragmentWithoutAutolaunchTest : DarjeelingFragmentTest<SampleFragmen
         setupKoin()
         launchFragment()
 
-        eventuallyAssertThat {
+        eventually {
             assertThat(textView(R.id.textBoolean).text.toString()).isEqualTo("false")
         }
     }

@@ -18,6 +18,7 @@ import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers
+import no.agens.darjeeling.android.ext.stackTraceAsString
 import org.junit.Assert.fail
 import java.lang.System.currentTimeMillis
 import kotlin.reflect.KClass
@@ -26,50 +27,31 @@ object DarjeelingUtils {
 
     private const val DEFAULT_TIMEOUT = 2000L
 
-    fun eventually(timeoutMs: Long = DEFAULT_TIMEOUT, assertionFunction: () -> ViewInteraction) {
+    fun eventually(timeoutMs: Long = DEFAULT_TIMEOUT, assertion: () -> Unit) {
         val start = currentTimeMillis()
+        var lastError: Error? = null
         while (currentTimeMillis() < start + timeoutMs) {
             try {
-                assertionFunction()
+                assertion()
                 return
             } catch (ex: Error) {
+                lastError = ex
                 Thread.sleep(100)
             }
         }
 
-        println("Waited for $timeoutMs ms.")
-        assertionFunction()
+        fail("Waited for $timeoutMs ms.\n\uD83D\uDCA5 Assertion error: ${lastError?.message}. Trace: ${lastError?.stackTraceAsString()}")
+
     }
 
-    fun eventuallyAssertThat(timeoutMs: Long = DEFAULT_TIMEOUT, assertionFunction: () -> Unit) {
-        val start = currentTimeMillis()
-        while (currentTimeMillis() < start + timeoutMs) {
-            try {
-                assertionFunction()
-                return
-            } catch (ex: Error) {
-                Thread.sleep(100)
-            }
-        }
-
-        println("Waited for $timeoutMs ms.")
-        assertionFunction()
+    @Deprecated("Use eventually from now on.")
+    fun eventuallyAssertThat(timeoutMs: Long = DEFAULT_TIMEOUT, assertion: () -> Unit) {
+        eventually(timeoutMs, assertion)
     }
 
-
+    @Deprecated("Use eventually from now on.")
     fun eventuallyAsserted(timeoutMs: Long = DEFAULT_TIMEOUT, assertionFunction: () -> Unit) {
-        val start = currentTimeMillis()
-        while (currentTimeMillis() < start + timeoutMs) {
-            try {
-                assertionFunction()
-                return
-            } catch (ex: Error) {
-                Thread.sleep(100)
-            }
-        }
-
-        println("Waited for $timeoutMs ms.")
-        assertionFunction()
+        eventually(timeoutMs, assertionFunction)
     }
 
     fun <T : Activity> eventuallyActivityLaunched(
