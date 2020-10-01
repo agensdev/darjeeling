@@ -18,6 +18,7 @@ import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers
+import kotlinx.coroutines.*
 import no.agens.darjeeling.android.ext.stackTraceAsString
 import org.junit.Assert.fail
 import java.lang.System.currentTimeMillis
@@ -27,22 +28,29 @@ object DarjeelingUtils {
 
     private const val DEFAULT_TIMEOUT = 2000L
 
-    fun eventually(timeoutMs: Long = DEFAULT_TIMEOUT, assertion: () -> Unit) {
+
+    fun eventually(timeoutMs: Long = DEFAULT_TIMEOUT, assertion: () -> Unit) =
+        eventually(timeoutMs, Dispatchers.Default, assertion)
+
+    fun eventually(timeoutMs: Long = DEFAULT_TIMEOUT, dispatcher: CoroutineDispatcher = Dispatchers.Default,
+        assertion: () -> Unit) = runBlocking(dispatcher) {
         val start = currentTimeMillis()
         var lastError: Error? = null
         while (currentTimeMillis() < start + timeoutMs) {
             try {
                 assertion()
-                return
+                return@runBlocking
             } catch (ex: Error) {
                 lastError = ex
-                Thread.sleep(100)
+                delay(100)
             }
         }
 
-        fail("Waited for $timeoutMs ms.\n\uD83D\uDCA5 Assertion error: ${lastError?.message}. Trace: ${lastError?.stackTraceAsString()}")
+        fail(
+            "Waited for $timeoutMs ms.\n\uD83D\uDCA5 Assertion error: ${lastError?.message}. Trace: ${lastError?.stackTraceAsString()}")
 
     }
+
 
     @Deprecated("Use eventually from now on.")
     fun eventuallyAssertThat(timeoutMs: Long = DEFAULT_TIMEOUT, assertion: () -> Unit) {
