@@ -37,6 +37,10 @@ Examples on how to use Darjeeling in your project is/will be available
 in the `app`-module of this repository. You can browse them here on  
 Github or clone the repository and run them from Android Studio.
 
+## User Guide
+
+[A preliminary user guide is available here](docs/userguide.md).
+
 ## Developer documentation
 
 This section contains documentation for developers contributing to the darjeeling-android-testing project itself.
