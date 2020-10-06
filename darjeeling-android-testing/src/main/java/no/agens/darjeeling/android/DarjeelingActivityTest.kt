@@ -2,8 +2,11 @@ package no.agens.darjeeling.android
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.test.espresso.intent.Intents
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import kotlin.reflect.KClass
 
@@ -22,6 +25,16 @@ abstract class DarjeelingActivityTest<T : AppCompatActivity>(
             addExtras(activityIntent)
             return activityIntent
         }
+    }
+
+    @Before
+    fun before() {
+        Intents.init()
+    }
+
+    @After
+    fun after() {
+        Intents.release()
     }
 
     abstract fun addExtras(intent: Intent)

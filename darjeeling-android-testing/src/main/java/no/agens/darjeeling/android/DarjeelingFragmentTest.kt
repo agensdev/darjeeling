@@ -3,6 +3,8 @@ package no.agens.darjeeling.android
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.testing.FragmentScenario
+import androidx.test.espresso.intent.Intents
+import org.junit.After
 import org.junit.Before
 
 abstract class DarjeelingFragmentTest<F : Fragment>(
@@ -16,10 +18,16 @@ abstract class DarjeelingFragmentTest<F : Fragment>(
         get() = underlyingActivity
 
     @Before
-    open fun setup() {
+    open fun before() {
+        Intents.init()
         if (autoLaunchFragments) {
             launchFragment()
         }
+    }
+
+    @After
+    open fun after() {
+        Intents.release()
     }
 
     abstract fun createFragmentScenario(): FragmentScenario<F>

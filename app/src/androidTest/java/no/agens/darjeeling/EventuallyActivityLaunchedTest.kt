@@ -5,7 +5,6 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.runBlocking
 import no.agens.darjeeling.android.DarjeelingActivityTest
 import no.agens.darjeeling.android.DarjeelingUtils.eventuallyActivityLaunched
-import no.agens.darjeeling.android.DarjeelingUtils.recordActivityLaunches
 import org.junit.Test
 
 class EventuallyActivityLaunchedTest : DarjeelingActivityTest<MainActivity>(MainActivity::class) {
@@ -13,7 +12,7 @@ class EventuallyActivityLaunchedTest : DarjeelingActivityTest<MainActivity>(Main
     }
 
     @Test
-    fun launchingActivitiesCanBeCheckedWitheventuallyActivityLaunched() = recordActivityLaunches {
+    fun launchingActivitiesCanBeCheckedWitheventuallyActivityLaunched() {
         runBlocking(Main) {
             button(R.id.buttonLaunchAnotherActivity).performClick()
         }

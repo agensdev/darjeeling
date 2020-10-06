@@ -72,15 +72,6 @@ object DarjeelingUtils {
         }
     }
 
-    fun recordActivityLaunches(block: () -> Unit) {
-        Intents.init()
-        try {
-            block()
-        } finally {
-            Intents.release()
-        }
-    }
-
     fun eventuallyFragmentLaunched(
         timeoutMs: Long = DEFAULT_TIMEOUT,
         fragmentManager: FragmentManager, tag: String
