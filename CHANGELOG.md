@@ -1,3 +1,7 @@
+# 0.82
+* Bugfixes
+* Now based on Espresso 3.3.0
+
 # 0.81
 * Add better support for coroutines with `eventually` methods.
 

@@ -14,7 +14,7 @@ android {
         minSdkVersion(21)
         targetSdkVersion(29)
         versionCode = gitInfo.count
-        versionName = "0.81"
+        versionName = "0.82"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -63,16 +63,16 @@ publishing {
 }
 
 dependencies {
-    runtimeOnly("org.jetbrains.kotlin:kotlin-stdlib:1.4.0")
-    runtimeOnly("androidx.core:core-ktx:1.3.1")
+    runtimeOnly("org.jetbrains.kotlin:kotlin-stdlib:1.4.10")
+    runtimeOnly("androidx.core:core-ktx:1.3.2")
     runtimeOnly("androidx.appcompat:appcompat:1.2.0")
-    compileOnly("androidx.constraintlayout:constraintlayout:2.0.1")
+    compileOnly("androidx.constraintlayout:constraintlayout:2.0.3")
     debugImplementation("androidx.fragment:fragment-testing:1.2.5")
-    implementation("junit:junit:4.12")
+    implementation("junit:junit:4.13.1")
     implementation("androidx.test.ext:junit:1.1.2")
-    implementation("androidx.test.espresso:espresso-intents:3.2.0")
-    implementation("androidx.test.espresso:espresso-contrib:3.2.0")
-    implementation("androidx.test.espresso:espresso-core:3.2.0")
+    implementation("androidx.test.espresso:espresso-intents:3.3.0")
+    implementation("androidx.test.espresso:espresso-contrib:3.3.0")
+    implementation("androidx.test.espresso:espresso-core:3.3.0")
 
     api("androidx.fragment:fragment-testing:1.2.5")
 }

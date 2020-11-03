@@ -37,21 +37,23 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.0")
-    implementation("androidx.core:core-ktx:1.3.1")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.10")
+    implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("org.koin:koin-core:2.1.5")
     implementation("org.koin:koin-android:2.1.5")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
-    testImplementation("junit:junit:4.12")
-    debugImplementation("androidx.fragment:fragment-testing:1.2.5")
-    androidTestImplementation("junit:junit:4.12")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.3")
+    testImplementation("junit:junit:4.13.1")
+    debugImplementation("androidx.fragment:fragment-testing:1.2.5") {
+        exclude(group = "androidx.test", module = "core")
+    }
+    androidTestImplementation("junit:junit:4.13.1")
     androidTestImplementation("org.assertj:assertj-core:3.17.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test:runner:1.2.0")
-    androidTestImplementation("androidx.test:core:1.2.0")
+    androidTestImplementation("androidx.test:runner:1.3.0")
+    androidTestImplementation("androidx.test:core:1.3.0")
     androidTestImplementation("org.koin:koin-test:2.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-intents:3.2.0")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.3.0")
     androidTestImplementation("io.mockk:mockk-android:1.10.0")
     androidTestImplementation(project(":darjeeling-android-testing"))
 }
