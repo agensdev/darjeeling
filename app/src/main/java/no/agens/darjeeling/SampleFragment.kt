@@ -19,6 +19,10 @@ class SampleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arguments?.getString("initial_button_text")?.let {
+            buttonForTesting.text = it
+        }
+
         buttonForTesting.setOnClickListener {
             buttonForTesting.text = "Changed text"
             dependency.doSomething()

@@ -1,3 +1,7 @@
+# 0.90
+* New! We've simplified Activity and Fragment testing a great deal by introducing two new methods: `testActivity()` and `testFragment()`.
+* DarjeelingActivityTest and DarjeelingFragmentTest has been deprecated in favor of this new testing approach.
+
 # 0.82
 * Bugfixes
 * Now based on Espresso 3.3.0

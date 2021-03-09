@@ -7,6 +7,7 @@ import androidx.test.espresso.intent.Intents
 import org.junit.After
 import org.junit.Before
 
+@Deprecated("Use testFragment() instead.")
 abstract class DarjeelingFragmentTest<F : Fragment>(
     private val autoLaunchFragments: Boolean = true
 ) : DarjeelingBase() {

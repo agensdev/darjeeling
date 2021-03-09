@@ -1,5 +1,33 @@
 # Darjeeling User Guide
 
+## Running fragment tests
+
+Running tests on a fragment is done with the `testFragment` method:
+
+```
+testFragment(SampleFragment::class) { scenario ->
+    scenario.onFragment { fragment ->
+        // TODO perform operations on the fragment and assertions here
+    }
+}
+```
+
+You can find more documentation on testing fragments [here](https://developer.android.com/guide/fragments/test).
+
+## Running activity tests
+
+```
+testActivity(MainActivity::class) { scenario ->
+    scenario.onActivity { activity ->
+        // TODO perform operations on the activity and assertions here
+    }
+}
+```
+
+Further documentation on what you can do with the ActivityScenario can  
+be found [here](https://developer.android.com/reference/androidx/test/core/app/ActivityScenario).
+[This blog post on testing with ActivityScenario](https://medium.com/google-developer-experts/stepping-into-activity-tests-with-activityscenarios-5db98d5311e6) can also be helpful for getting into activity testing.
+
 ## Utility methods for eventually asserting
 
 Darjeeling provides utility methods for asserting various states that  
@@ -32,14 +60,10 @@ was displayed to the user.
 
 Darjeeling provides both Activity and Fragment tests with useful methods for looking up and interacting with your view components.
 
-These are available as methods in your tests from the `DarjeelingBase` base class:
+These are available as extension methods on the activity or fragment obtained from the respective scenarios.
 
 ```
-button(R.id.yourButton).performClick()
-textView(R.id.textField).text = "New text"
-imageView(R.id.textField).background = ...
+fragment.button(R.id.yourButton).performClick()
+fragment.textView(R.id.textField).text = "New text"
+activity.imageView(R.id.textField).background = ...
 ```
-
-Please note than when performing interractions with UI components you
-will have to run these on the main thread. The `runBlocking(Dispatchers.Main)`
-from Kotlin Coroutines is a clean and efficient way to do this.

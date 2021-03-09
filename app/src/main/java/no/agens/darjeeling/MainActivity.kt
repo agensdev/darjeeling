@@ -14,6 +14,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AnotherActivity::class.java)
             startActivity(intent)
         }
+
+        buttonHello.setOnClickListener {
+            textDemo.text = "Activity says hello."
+        }
     }
 
     class MyDependency() {

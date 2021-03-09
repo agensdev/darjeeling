@@ -14,7 +14,7 @@ android {
         minSdkVersion(21)
         targetSdkVersion(29)
         versionCode = gitInfo.count
-        versionName = "0.83"
+        versionName = "0.90.b1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -29,6 +29,15 @@ android {
 
     lintOptions {
         isAbortOnError = false
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 

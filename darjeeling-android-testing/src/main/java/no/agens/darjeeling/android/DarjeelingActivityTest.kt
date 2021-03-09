@@ -11,6 +11,7 @@ import org.junit.Rule
 import kotlin.reflect.KClass
 
 
+@Deprecated(message = "Use testActivity()")
 abstract class DarjeelingActivityTest<T : AppCompatActivity>(
     activityClass: KClass<T>) : DarjeelingBase() {
 

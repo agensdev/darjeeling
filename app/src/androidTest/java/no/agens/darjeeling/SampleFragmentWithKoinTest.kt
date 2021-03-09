@@ -1,22 +1,15 @@
 package no.agens.darjeeling
 
-import android.os.Bundle
-import androidx.fragment.app.testing.FragmentScenario
-import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.mockk.*
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.runBlocking
-import no.agens.darjeeling.android.DarjeelingFragmentTest
-import org.junit.AfterClass
+import no.agens.darjeeling.android.ext.button
+import no.agens.darjeeling.android.testFragment
 import org.junit.Assert
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.koin.core.context.loadKoinModules
-import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import org.koin.test.KoinTest
 
-class SampleFragmentWithKoinTest : DarjeelingFragmentTest<SampleFragment>() {
+class SampleFragmentWithKoinTest : KoinTest {
 
     private val mockedDependency = mockk<MainActivity.MyDependency> {
         every {
@@ -28,10 +21,6 @@ class SampleFragmentWithKoinTest : DarjeelingFragmentTest<SampleFragment>() {
         } returns true
     }
 
-    override fun createFragmentScenario(): FragmentScenario<SampleFragment> {
-        return launchFragmentInContainer(Bundle(), R.style.AppTheme)
-    }
-
     init {
         loadKoinModules(module {
             factory<MainActivity.MyDependency>(override = true) { mockedDependency }
@@ -40,11 +29,16 @@ class SampleFragmentWithKoinTest : DarjeelingFragmentTest<SampleFragment>() {
 
     @Test
     fun verifyDependencyCalledOnButtonClick() {
-        runBlocking(Main) {
-            button(R.id.buttonForTesting).performClick()
-            Assert.assertEquals("Changed text", button(R.id.buttonForTesting).text.toString())
-            verify(exactly = 1) {
-                mockedDependency.doSomething()
+
+        testFragment(SampleFragment::class) { scenario ->
+
+            scenario.onFragment { fragment ->
+                val buttonforTesting = fragment.button(R.id.buttonForTesting)
+                buttonforTesting.performClick()
+                Assert.assertEquals("Changed text", buttonforTesting.text.toString())
+                verify(exactly = 1) {
+                    mockedDependency.doSomething()
+                }
             }
         }
     }
