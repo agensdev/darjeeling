@@ -1,6 +1,7 @@
 package no.agens.darjeeling
 
 import androidx.core.os.bundleOf
+import androidx.fragment.app.testing.withFragment
 import no.agens.darjeeling.android.ext.button
 import no.agens.darjeeling.android.testFragment
 import org.junit.Assert.assertEquals
@@ -12,10 +13,10 @@ class TestFragmentExampleTest {
     fun demonstrateTestFragment() {
 
         testFragment(SampleFragment::class) { scenario ->
-            scenario.onFragment { fragment ->
+            scenario.withFragment {
 
-                fragment.button(R.id.buttonForTesting).performClick()
-                assertEquals("Changed text", fragment.button(R.id.buttonForTesting).text.toString())
+                button(R.id.buttonForTesting).performClick()
+                assertEquals("Changed text", button(R.id.buttonForTesting).text.toString())
             }
         }
     }
@@ -25,9 +26,8 @@ class TestFragmentExampleTest {
 
         val expectedInitialText = "Hi there!"
         testFragment(SampleFragment::class, bundleOf("initial_button_text" to expectedInitialText)) { scenario ->
-
-            scenario.onFragment { fragment ->
-                assertEquals(expectedInitialText, fragment.button(R.id.buttonForTesting).text.toString())
+            scenario.withFragment {
+                assertEquals(expectedInitialText, button(R.id.buttonForTesting).text.toString())
             }
         }
     }

@@ -5,13 +5,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(29)
-    buildToolsVersion("29.0.3")
+    compileSdkVersion(30)
 
     defaultConfig {
         applicationId = "no.agens.darjeeling"
         minSdkVersion(21)
-        targetSdkVersion(29)
+        targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
 
@@ -44,7 +43,7 @@ dependencies {
     implementation("org.koin:koin-android:2.2.2")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     testImplementation("junit:junit:4.13.1")
-    debugImplementation("androidx.fragment:fragment-testing:1.2.5") {
+    debugImplementation("androidx.fragment:fragment-testing:1.3.0") {
         exclude(group = "androidx.test", module = "core")
     }
     androidTestImplementation("junit:junit:4.13.1")

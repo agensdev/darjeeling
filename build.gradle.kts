@@ -1,5 +1,4 @@
 buildscript {
-    val kotlin_version by extra("1.4.10")
     repositories {
         mavenLocal()
         google()
@@ -8,7 +7,7 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:4.1.2")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.31")
         classpath(files("libs/gitInfo-1.3.1.jar"))
     }
 }

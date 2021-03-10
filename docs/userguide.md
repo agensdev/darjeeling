@@ -6,7 +6,7 @@ Running tests on a fragment is done with the `testFragment` method:
 
 ```
 testFragment(SampleFragment::class) { scenario ->
-    scenario.onFragment { fragment ->
+    scenario.withFragment {
         // TODO perform operations on the fragment and assertions here
     }
 }
