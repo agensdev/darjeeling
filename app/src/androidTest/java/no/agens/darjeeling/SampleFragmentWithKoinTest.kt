@@ -1,5 +1,6 @@
 package no.agens.darjeeling
 
+import androidx.fragment.app.testing.withFragment
 import io.mockk.*
 import no.agens.darjeeling.android.ext.button
 import no.agens.darjeeling.android.testFragment
@@ -23,7 +24,7 @@ class SampleFragmentWithKoinTest : KoinTest {
 
     init {
         loadKoinModules(module {
-            factory<MainActivity.MyDependency>(override = true) { mockedDependency }
+            factory(override = true) { mockedDependency }
         })
     }
 
@@ -31,9 +32,8 @@ class SampleFragmentWithKoinTest : KoinTest {
     fun verifyDependencyCalledOnButtonClick() {
 
         testFragment(SampleFragment::class) { scenario ->
-
-            scenario.onFragment { fragment ->
-                val buttonforTesting = fragment.button(R.id.buttonForTesting)
+            scenario.withFragment {
+                val buttonforTesting = button(R.id.buttonForTesting)
                 buttonforTesting.performClick()
                 Assert.assertEquals("Changed text", buttonforTesting.text.toString())
                 verify(exactly = 1) {
