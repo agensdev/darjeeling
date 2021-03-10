@@ -13,7 +13,7 @@ android {
         minSdkVersion(21)
         targetSdkVersion(30)
         versionCode = gitInfo.count
-        versionName = "0.90.b3"
+        versionName = "0.90.b4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

@@ -9,25 +9,22 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.intent.Intents
 import kotlin.reflect.KClass
 
-fun <T : Activity> testActivity(activityClass: KClass<T>, perform: (ActivityScenario<T>) -> Unit) {
+fun <T : Activity> testActivity(activityClass: KClass<T>, perform: ActivityScenario<T>.() -> Unit) {
 
     Intents.init()
     try {
-        ActivityScenario.launch(activityClass.java).use { activityScenario ->
-            perform(activityScenario)
-        }
+        ActivityScenario.launch(activityClass.java).use { it.perform() }
     } finally {
         Intents.release()
     }
 }
 
 fun <F : Fragment> testFragment(fragmentClass: KClass<F>, args: Bundle = bundleOf(),
-    perform: (FragmentScenario<F>) -> Unit) {
+    perform: FragmentScenario<F>.() -> Unit) {
 
     Intents.init()
     try {
-        val scenario: FragmentScenario<F> = FragmentScenario.launchInContainer(fragmentClass.java, args)
-        perform(scenario)
+        FragmentScenario.launchInContainer(fragmentClass.java, args).perform()
     } finally {
         Intents.release()
     }

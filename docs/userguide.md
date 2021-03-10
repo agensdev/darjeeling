@@ -5,8 +5,8 @@
 Running tests on a fragment is done with the `testFragment` method:
 
 ```
-testFragment(SampleFragment::class) { scenario ->
-    scenario.withFragment {
+testFragment(SampleFragment::class) {
+    withFragment {
         // TODO perform operations on the fragment and assertions here
     }
 }
@@ -17,8 +17,8 @@ You can find more documentation on testing fragments [here](https://developer.an
 ## Running activity tests
 
 ```
-testActivity(MainActivity::class) { scenario ->
-    scenario.onActivity { activity ->
+testActivity(MainActivity::class) { 
+    onActivity { activity -> 
         // TODO perform operations on the activity and assertions here
     }
 }
@@ -60,10 +60,20 @@ was displayed to the user.
 
 Darjeeling provides both Activity and Fragment tests with useful methods for looking up and interacting with your view components.
 
-These are available as extension methods on the activity or fragment obtained from the respective scenarios.
+These are available as extension methods for fragments and activities.
 
+Example:
 ```
-fragment.button(R.id.yourButton).performClick()
-fragment.textView(R.id.textField).text = "New text"
-activity.imageView(R.id.textField).background = ...
+testFragment(MyFragment::class) {
+    withFragment {
+        textView(R.id.textField).text = "New text" 
+        button(R.id.yourButton).performClick() 
+    }
+}
+
+testActivity(MyActivity:class) {
+    onActivity {
+        imageView(R.id.textField).background = ...
+    }
+}
 ```

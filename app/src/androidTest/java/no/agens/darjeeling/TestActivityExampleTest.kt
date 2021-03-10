@@ -12,11 +12,10 @@ class TestActivityExampleTest {
     @Test
     fun demonstrateUseOfTestActivity() {
 
-        testActivity(MainActivity::class) { scenario ->
-            scenario.onActivity { activity ->
-                activity.button(R.id.buttonLaunchAnotherActivity).performClick()
+        testActivity(MainActivity::class) {
+            onActivity {
+                button(R.id.buttonLaunchAnotherActivity).performClick()
             }
-
             eventuallyActivityLaunched(activity = AnotherActivity::class)
         }
     }
@@ -24,10 +23,10 @@ class TestActivityExampleTest {
     @Test
     fun demonstrateUseOfTestActivity2() {
 
-        testActivity(MainActivity::class) { scenario ->
-            scenario.onActivity { activity ->
-                activity.button(R.id.buttonHello).performClick()
-                assertEquals("Activity says hello.", activity.textView(R.id.textDemo).text.toString())
+        testActivity(MainActivity::class) {
+            onActivity {
+                button(R.id.buttonHello).performClick()
+                assertEquals("Activity says hello.", textView(R.id.textDemo).text.toString())
             }
         }
     }

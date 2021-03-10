@@ -10,14 +10,13 @@ class EventuallyActivityLaunchedTest {
     @Test
     fun launchingActivitiesCanBeCheckedWitheventuallyActivityLaunched() {
 
-        testActivity(MainActivity::class) { scenario ->
+        testActivity(MainActivity::class) {
 
-            scenario.onActivity { activity ->
-                activity.button(R.id.buttonLaunchAnotherActivity).performClick()
+            onActivity {
+                button(R.id.buttonLaunchAnotherActivity).performClick()
             }
 
             eventuallyActivityLaunched(activity = AnotherActivity::class)
         }
-
     }
 }

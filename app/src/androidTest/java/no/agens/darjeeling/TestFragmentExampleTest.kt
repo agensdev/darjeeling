@@ -12,9 +12,8 @@ class TestFragmentExampleTest {
     @Test
     fun demonstrateTestFragment() {
 
-        testFragment(SampleFragment::class) { scenario ->
-            scenario.withFragment {
-
+        testFragment(SampleFragment::class) {
+            withFragment {
                 button(R.id.buttonForTesting).performClick()
                 assertEquals("Changed text", button(R.id.buttonForTesting).text.toString())
             }
@@ -25,8 +24,8 @@ class TestFragmentExampleTest {
     fun demonstrateTestFragmentWithArgs() {
 
         val expectedInitialText = "Hi there!"
-        testFragment(SampleFragment::class, bundleOf("initial_button_text" to expectedInitialText)) { scenario ->
-            scenario.withFragment {
+        testFragment(SampleFragment::class, bundleOf("initial_button_text" to expectedInitialText)) {
+            withFragment {
                 assertEquals(expectedInitialText, button(R.id.buttonForTesting).text.toString())
             }
         }

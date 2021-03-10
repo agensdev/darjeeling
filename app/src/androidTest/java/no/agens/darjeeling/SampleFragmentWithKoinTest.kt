@@ -31,8 +31,8 @@ class SampleFragmentWithKoinTest : KoinTest {
     @Test
     fun verifyDependencyCalledOnButtonClick() {
 
-        testFragment(SampleFragment::class) { scenario ->
-            scenario.withFragment {
+        testFragment(SampleFragment::class) {
+            withFragment {
                 val buttonforTesting = button(R.id.buttonForTesting)
                 buttonforTesting.performClick()
                 Assert.assertEquals("Changed text", buttonforTesting.text.toString())
