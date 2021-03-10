@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.testing.FragmentScenario
-import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.intent.Intents
 import kotlin.reflect.KClass
@@ -22,12 +21,12 @@ fun <T : Activity> testActivity(activityClass: KClass<T>, perform: (ActivityScen
     }
 }
 
-inline fun <reified F : Fragment> testFragment(fragmentClass: KClass<F>, args: Bundle = bundleOf(),
+fun <F : Fragment> testFragment(fragmentClass: KClass<F>, args: Bundle = bundleOf(),
     perform: (FragmentScenario<F>) -> Unit) {
 
     Intents.init()
     try {
-        val scenario: FragmentScenario<F> = launchFragmentInContainer(args)
+        val scenario: FragmentScenario<F> = FragmentScenario.launchInContainer(fragmentClass.java, args)
         perform(scenario)
     } finally {
         Intents.release()

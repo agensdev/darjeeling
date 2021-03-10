@@ -12,7 +12,6 @@ class TestFragmentExampleTest {
     fun demonstrateTestFragment() {
 
         testFragment(SampleFragment::class) { scenario ->
-
             scenario.onFragment { fragment ->
 
                 fragment.button(R.id.buttonForTesting).performClick()
