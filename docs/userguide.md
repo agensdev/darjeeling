@@ -24,6 +24,18 @@ testActivity(MainActivity::class) {
 }
 ```
 
+You can also test your activity using an `Intent`, for passing in extras etc:
+```
+val intent = Intent(ApplicationProvider.getApplicationContext(), MainActivity::class.java)
+intent.putExtra("message", "Hello, Test!")
+
+testActivity<MainActivity>(intent) {
+    onActivity { activity -> 
+        // TODO perform operations on the activity and assertions here
+    }
+}
+```
+
 Further documentation on what you can do with the ActivityScenario can
 be found [here](https://developer.android.com/reference/androidx/test/core/app/ActivityScenario).
 [This blog post on testing with ActivityScenario](https://medium.com/google-developer-experts/stepping-into-activity-tests-with-activityscenarios-5db98d5311e6) can also be helpful for getting into activity testing.

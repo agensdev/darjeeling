@@ -1,5 +1,7 @@
 package no.agens.darjeeling
 
+import android.content.Intent
+import androidx.test.core.app.ApplicationProvider
 import no.agens.darjeeling.android.DarjeelingUtils.eventuallyActivityLaunched
 import no.agens.darjeeling.android.ext.button
 import no.agens.darjeeling.android.ext.textView
@@ -27,6 +29,21 @@ class TestActivityExampleTest {
             onActivity {
                 button(R.id.buttonHello).performClick()
                 assertEquals("Activity says hello.", textView(R.id.textDemo).text.toString())
+            }
+        }
+    }
+
+    @Test
+    fun testActivityWithIntent() {
+
+        val intent = Intent(ApplicationProvider.getApplicationContext(), MainActivity::class.java)
+        intent.putExtra("message", "Hello, Test!")
+
+        testActivity<MainActivity>(intent) {
+
+            onActivity {
+                button(R.id.buttonHello).performClick()
+                assertEquals("Hello, Test!", textView(R.id.textDemo).text.toString())
             }
         }
     }

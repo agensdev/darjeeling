@@ -15,8 +15,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val message = intent?.getStringExtra("message")
+
         buttonHello.setOnClickListener {
-            textDemo.text = "Activity says hello."
+            textDemo.text = if (message.isNullOrEmpty()) "Activity says hello." else message
         }
     }
 
