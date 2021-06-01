@@ -1,3 +1,6 @@
+# 0.91
+* Add string-extension methods for Activity and Fragment for getting strings with format arguments.
+
 # 0.90
 * New! We've simplified Activity and Fragment testing a great deal by introducing two new methods: `testActivity()` and `testFragment()`.
 * DarjeelingActivityTest and DarjeelingFragmentTest has been deprecated in favor of this new testing approach.
