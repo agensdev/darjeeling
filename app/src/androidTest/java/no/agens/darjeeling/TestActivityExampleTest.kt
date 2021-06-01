@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.test.core.app.ApplicationProvider
 import no.agens.darjeeling.android.DarjeelingUtils.eventuallyActivityLaunched
 import no.agens.darjeeling.android.ext.button
+import no.agens.darjeeling.android.ext.string
 import no.agens.darjeeling.android.ext.textView
 import no.agens.darjeeling.android.testActivity
 import org.junit.Assert.assertEquals
@@ -44,6 +45,16 @@ class TestActivityExampleTest {
             onActivity {
                 button(R.id.buttonHello).performClick()
                 assertEquals("Hello, Test!", textView(R.id.textDemo).text.toString())
+            }
+        }
+    }
+
+    @Test
+    fun testStringWithArgsExtensionMetod() {
+
+        testActivity(MainActivity::class) {
+            onActivity {
+                assertEquals("Hello, John!", string(R.string.test_string_with_args, "John"))
             }
         }
     }

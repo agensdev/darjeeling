@@ -143,12 +143,12 @@ inline fun <reified A : Activity> ActivityScenario<A>.string(@StringRes stringRe
 
 inline fun <reified F : Fragment> FragmentScenario<F>.string(@StringRes stringResId: Int,
     vararg formatArgs: Any): String =
-    withFragment { resources.getString(stringResId, formatArgs) }
+    withFragment { resources.getString(stringResId, *formatArgs) }
 
 inline fun <reified A : Activity> ActivityScenario<A>.string(@StringRes stringResId: Int,
     vararg formatArgs: Any): String {
     lateinit var string: String
-    onActivity { string = it.resources.getString(stringResId, formatArgs) }
+    onActivity { string = it.resources.getString(stringResId, *formatArgs) }
     return string
 }
 

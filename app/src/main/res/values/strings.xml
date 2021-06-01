@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">darjeeling</string>
+    <string name="test_string_with_args">Hello, %1$s!</string>
 </resources>

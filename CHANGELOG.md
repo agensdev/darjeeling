@@ -1,3 +1,6 @@
+# 0.91.1
+* Fix bug in recently added strings-extension method with format args.
+
 # 0.91
 * Add string-extension methods for Activity and Fragment for getting strings with format arguments.
 
