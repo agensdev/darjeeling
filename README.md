@@ -34,14 +34,6 @@ Keep checking back for updates.
 
 ## Great, how do I include Darjeeling in my project?
 
-First, you need to add the repository and dependency to your project build file.
-
-```kotlin
-repositories {
-    maven(url = "http://repo.agens.no:8081/nexus/content/repositories/oss-releases")
-}
-```
-
 Then add the Darjeeling dependency to the `androidTestImplementation`
 configuration:
 
@@ -50,10 +42,6 @@ dependencies {
     androidTestImplementation("no.agens.darjeeling:darjeeling-android-testing:$darjeeling_version")
 }
 ```
-
-Please see
-the [Agens Nexus Repository](http://repo.agens.no:8081/nexus/content/repositories/oss-releases/no/agens/darjeeling/darjeeling-android-testing/)
-for the latest version.
 
 ## Code examples
 
@@ -81,3 +69,4 @@ to [the vanniktech publishing plugin documentation](https://github.com/vanniktec
 1. Tag the new version with a tag prefixed with `release_`, i.e. `release_0.70`
 2. Push the changes and tags to the remote
 3. Publish the new artifact using the Gradle command `./gradlew publish --no-daemon --no-parallel`
+4. Follow the [Sonatype documentation for releasing the published artifact](https://central.sonatype.org/publish/release/).
