@@ -6,9 +6,9 @@ buildscript {
         maven { url = java.net.URI("https://jitpack.io") }
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.1.2")
+        classpath("com.android.tools.build:gradle:7.0.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.31")
-        classpath(files("libs/gitInfo-1.3.1.jar"))
+        classpath("com.vanniktech:gradle-maven-publish-plugin:0.15.0")
     }
 }
 
